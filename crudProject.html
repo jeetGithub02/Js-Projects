@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crud Project</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+    *{
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        h1{
+            text-align: center;
+        }
+        table {
+            margin:20px auto;
+            
+        }
+        table, tr, th , td{
+            border:1px solid rgb(78, 69, 69);
+            border-collapse: collapse;
+            height: 50px;
+            
+            font-size: 20px;
+            
+            
+            
+        }
+     
+        #add{
+            
+             padding:10px 15px;
+             font-size: 15px;
+             border-radius: 10px;
+             font-weight: bold;
+             background: yellowgreen;
+             transition:0.2s all;
+             margin:10px ;
+
+        }
+        #add:hover{
+            background:#63d81f;
+        }
+         input , select{
+            border:none;
+            outline: none;
+            font-size: 20px;
+            padding: 10px;
+            
+
+
+         }
+        #inputTable th{
+            font-size: 25px;
+            color: rgb(47, 168, 181);
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        #listBox{
+           
+            display: flex;
+            justify-content: center;
+
+            height: 600px;
+            width: 80%;
+            margin: auto;
+
+        }
+        #listTable {
+            width: 300px;
+        }
+        #listTable th{
+            background-color: aliceblue;
+            padding-left: 100px;
+            padding-right: 100px;
+       
+    
+        }
+        #listTable tr td{
+            padding-left: 10px;
+            font-size: 15px;
+        }
+        #listTable tr td button{
+         padding: 5px;
+         margin-right: 5px;
+         background: #63d81f;
+         border-radius: 5px;
+         width: 120px;
+
+        }
+
+
+    </style>
+</head>
+<body>
+    <h1>Crud Project By Jeet</h1>
+    
+        <table id="inputTable">
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Profession</th>
+            </tr>
+            <tr>
+                 <td><input type="text" id="name" placeholder= "Inter Your Fullname"></td>
+                 <td><input type="number" id="age" placeholder="Inter Your Age"></td>
+                 <td><select id="profession" >
+                    <option value="">Select</option>
+                    <option value="Front-end">Front-end</option>
+                    <option value="Back-end">Back-end</option>
+                    <option value="Fullstack">Fullstack</option>
+                    <option value="Designer">Designer</option>
+                    
+                 </select></td>
+            </tr>
+            <tr>
+                <th  colspan="3"><input type="button" id="add" value="Add Member"></th>
+            </tr>
+            
+        </table>
+        
+        
+    
+    <div id="listBox">
+        <table id="listTable">
+     <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Profession</th>
+        <th> Action </th>
+     </tr>
+    </table>
+    </div>
+
+
+    <script>
+        let name = document.getElementById("name");
+        let age = document.getElementById("age");
+        let profession = document.getElementById("profession");
+        let listTable = document.getElementById("listTable") ;
+        
+        
+    
+
+
+        document.getElementById("add").addEventListener("click",()=>{
+            let memberList = document.createElement("tr");
+            
+            if(name.value && age.value && profession.value){
+                listTable.appendChild(memberList).innerHTML= `<td>${name.value}</td><td>${age.value}</td><td>${profession.value}</td><td>
+                    <button class="actionBtn" onclick="actionBtn(this)">Edit</button> <button class="actionBtn" onclick="actionBtn(this)">Delete</button>
+                    </td>`;
+               name.value ="";
+               age.value = "";
+               profession.value="";
+
+                }else{
+                    name.placeholder="Plese Inter Valid Name ";
+                   
+                    age.placeholder="Plese Inter Valid Age "
+                }
+
+
+
+        });
+       function actionBtn(e){
+        if(e.innerText=="Delete"){
+             e.parentNode.parentNode.remove();
+
+       }else if(e.innerText=="Edit" ){
+
+        name.value= e.parentNode.parentNode.childNodes[0].innerText ;
+        age.value = e.parentNode.parentNode.childNodes[1].innerText ;
+        profession.value = e.parentNode.parentNode.childNodes[2].innerText ;
+        e.parentNode.parentNode.remove();
+       }
+       }
+       
+    </script>
+</body>
+</html>
